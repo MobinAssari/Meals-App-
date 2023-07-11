@@ -50,6 +50,14 @@ class _TabScrxeenState extends State<TabsScreen> {
   Widget build(context) {
     Widget activeScreen = CategoriesScreen(onFavoriteListEdit: _favoriteListEdit,);
     var _activePageTitle = "Categories";
+    void selectedScreen(String identifier){
+      if(identifier == 'meals'){
+        Navigator.of(context).pop();
+      }
+      else if(identifier == 'filters'){
+
+      }
+    }
 
     if (_selectedPageIndex == 1) {
       activeScreen = MealsScreen(
@@ -63,7 +71,7 @@ class _TabScrxeenState extends State<TabsScreen> {
           backgroundColor: Colors.black87,
           centerTitle: true,
           title: Text(_activePageTitle),
-        ),drawer: const MainDrawer(),
+        ),drawer: MainDrawer(onSelectScreen: selectedScreen,),
         body: activeScreen,
         bottomNavigationBar: BottomNavigationBar(
           items: const [
