@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meals_app/screens/categories.dart';
+import 'package:meals_app/screens/filters.dart';
 import 'package:meals_app/screens/meals.dart';
 import 'package:meals_app/widgets/main_drawer.dart';
 
@@ -51,12 +52,11 @@ class _TabScrxeenState extends State<TabsScreen> {
     Widget activeScreen = CategoriesScreen(onFavoriteListEdit: _favoriteListEdit,);
     var _activePageTitle = "Categories";
     void selectedScreen(String identifier){
-      if(identifier == 'meals'){
-        Navigator.of(context).pop();
+      Navigator.of(context).pop();
+      if(identifier == 'filters'){
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> FiltersScreen(),),);
       }
-      else if(identifier == 'filters'){
-
-      }
+      
     }
 
     if (_selectedPageIndex == 1) {
