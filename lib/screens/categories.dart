@@ -7,7 +7,9 @@ import '../model/category.dart';
 import '../model/meal.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({super.key,required this.onFavoriteListEdit});
+  final void Function(Meal meal) onFavoriteListEdit;
+
 
   void _selectedCategory(BuildContext context, Category category) {
     List<Meal> selectedMeals = dummyMeals.where((meal) => meal.categories.contains(category.id)).toList();
@@ -15,7 +17,7 @@ class CategoriesScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (ctx) => MealsScreen(meals: selectedMeals, title: category.title,
+        builder: (ctx) => MealsScreen(meals: selectedMeals, title: category.title, onFavoriteListEdit: onFavoriteListEdit,
         ),
       ),
     );
@@ -23,17 +25,10 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return Scaffold(
-      appBar: AppBar(centerTitle: true,
-        backgroundColor: Colors.black87,
-        title: const Text(
-          "Catrgories",
-        ),
-      ),
-      body: Container(
+    return Container(
         color: Colors.black87,
         child: GridView(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 3 / 2,
@@ -46,7 +41,7 @@ class CategoriesScreen extends StatelessWidget {
               )
           ],
         ),
-      ),
+
     );
   }
 }

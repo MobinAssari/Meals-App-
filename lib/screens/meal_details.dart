@@ -5,14 +5,15 @@ import 'package:transparent_image/transparent_image.dart';
 import '../model/meal.dart';
 
 class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen({super.key, required this.meal});
+  const MealDetailsScreen({super.key, required this.meal, required this.onFavoriteListEdit});
 
   final Meal meal;
+  final void Function(Meal meal) onFavoriteListEdit;
 
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(actions: [IconButton(onPressed: (){onFavoriteListEdit(meal,);}, icon: Icon(Icons.star))],
         title: Text(
           meal.title,
           style: const TextStyle(
