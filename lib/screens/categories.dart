@@ -24,10 +24,10 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(centerTitle: true,
         backgroundColor: Colors.black87,
         title: const Text(
-          "appbar text",
+          "Catrgories",
         ),
       ),
       body: Container(
