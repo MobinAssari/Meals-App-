@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meals_app/screens/categories.dart';
 import 'package:meals_app/screens/meals.dart';
+import 'package:meals_app/widgets/main_drawer.dart';
 
 import '../model/meal.dart';
 
@@ -14,6 +15,11 @@ class TabsScreen extends StatefulWidget {
 
 class _TabScrxeenState extends State<TabsScreen> {
   int _selectedPageIndex = 0;
+  void _favoriteSelectMessege(String messege){
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(backgroundColor: Colors.white, content: Text(messege,style: const TextStyle(color: Colors.black87),),),);
+  }
 
   void _selectPage(int index) {
     setState(() {
@@ -23,12 +29,18 @@ class _TabScrxeenState extends State<TabsScreen> {
   final List<Meal> favoriteMeals=[];
 
   void _favoriteListEdit(Meal selectedMeal){
-    if(favoriteMeals.contains(selectedMeal)){
-      favoriteMeals.remove(selectedMeal);
-    }
-    else {
+    setState(() {
+      if(favoriteMeals.contains(selectedMeal)){
+        favoriteMeals.remove(selectedMeal);
+        _favoriteSelectMessege('This meal is no longer in your favorite list');
+      }
+      else {
       favoriteMeals.add(selectedMeal);
-    }
+      _favoriteSelectMessege('Added to favorite list');
+
+      }
+    },);
+
     }
 
 
@@ -51,7 +63,7 @@ class _TabScrxeenState extends State<TabsScreen> {
           backgroundColor: Colors.black87,
           centerTitle: true,
           title: Text(_activePageTitle),
-        ),
+        ),drawer: const MainDrawer(),
         body: activeScreen,
         bottomNavigationBar: BottomNavigationBar(
           items: const [
