@@ -17,7 +17,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   var _vegetarian = false;
   var _vegan = false;
 
-  void selectScreen(String identifier) {
+ /* void selectScreen(String identifier) {
     Navigator.of(context).pop();
 
     if (identifier == 'meals') {
@@ -27,7 +27,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
         ),
       );
     }
-  }
+  }*/
 
   @override
   Widget build(context) {
@@ -37,7 +37,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
         backgroundColor: Colors.black87,
         title: Text('Your Filters'),
       ),
-      drawer: MainDrawer(onSelectScreen: selectScreen),
+     // drawer: MainDrawer(onSelectScreen: selectScreen),
       body: Container(
         color: Colors.black87,
         padding: const EdgeInsets.all(15),

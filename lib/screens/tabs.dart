@@ -54,7 +54,7 @@ class _TabScrxeenState extends State<TabsScreen> {
     void selectedScreen(String identifier){
       Navigator.of(context).pop();
       if(identifier == 'filters'){
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> FiltersScreen(),),);
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> FiltersScreen(),),);
       }
       
     }
