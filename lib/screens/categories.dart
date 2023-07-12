@@ -7,12 +7,13 @@ import '../model/category.dart';
 import '../model/meal.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key,required this.onFavoriteListEdit});
+  CategoriesScreen({super.key,required this.onFavoriteListEdit, required this.filteredMeals});
   final void Function(Meal meal) onFavoriteListEdit;
+  List<Meal> filteredMeals;
 
 
   void _selectedCategory(BuildContext context, Category category) {
-    List<Meal> selectedMeals = dummyMeals.where((meal) => meal.categories.contains(category.id)).toList();
+    List<Meal> selectedMeals = filteredMeals.where((meal) => meal.categories.contains(category.id)).toList();
 
     Navigator.push(
       context,
