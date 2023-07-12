@@ -51,10 +51,10 @@ class _TabScrxeenState extends State<TabsScreen> {
   Widget build(context) {
     Widget activeScreen = CategoriesScreen(onFavoriteListEdit: _favoriteListEdit,);
     var _activePageTitle = "Categories";
-    void selectedScreen(String identifier){
-      Navigator.of(context).pop();
+    void selectedScreen(String identifier) async {
+      Navigator.of(context).pop<Map<Filter,bool>>();
       if(identifier == 'filters'){
-        Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> FiltersScreen(),),);
+        final result = await Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> FiltersScreen(),),);
       }
       
     }
