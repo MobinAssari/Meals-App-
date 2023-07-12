@@ -43,6 +43,15 @@ class MainDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(
+              Icons.food_bank_outlined,
+              size: 40,color: Color.fromARGB(
+                255, 206, 173, 144),
+            ),
+            title: const Text('Meals',style: TextStyle(color: Color.fromARGB(
+                255, 206, 173, 144),fontSize: 22),),onTap: () {onSelectScreen('meals');},
+          ),
+          ListTile(
+            leading: const Icon(
               Icons.settings,
               size: 40,color: Color.fromARGB(
                 255, 206, 173, 144),
