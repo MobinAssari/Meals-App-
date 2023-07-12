@@ -9,17 +9,23 @@ class FiltersScreen extends StatefulWidget {
   State<FiltersScreen> createState() {
     return _FiltersScreenState();
   }
-
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
   var _glutinState = false;
-  void selectScreen(String identifier){
+  var _lactoseState = false;
+  var _vegetarian = false;
+  var _vegan = false;
+
+  void selectScreen(String identifier) {
     Navigator.of(context).pop();
 
-    if(identifier == 'meals'){
-      
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> TabsScreen(),),);
+    if (identifier == 'meals') {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (ctx) => TabsScreen(),
+        ),
+      );
     }
   }
 
@@ -35,9 +41,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
       body: Container(
         color: Colors.black87,
         padding: const EdgeInsets.all(15),
-        child: const Column(
+        child: Column(
           children: [
-            /*SwitchListTile(
+            SwitchListTile(
               value: _glutinState,
               onChanged: (isChecked) {
                 setState(() {
@@ -45,19 +51,79 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 });
               },
               title: const Text(
-                'Glutin_free',
+                'Gluten_free',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 206, 173, 144),
+                    color: Color.fromARGB(255, 206, 161, 116),
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text(
+                'You\'ll just see gluten_free meals',
+                style: TextStyle(
+                    color: Color.fromARGB(221, 206, 172, 144), fontSize: 12),
+              ),
+            ),
+            SwitchListTile(
+              value: _lactoseState,
+              onChanged: (isChecked) {
+                setState(() {
+                  _lactoseState = isChecked;
+                });
+              },
+              title: const Text(
+                'Lactose_free',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 206, 161, 116),
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text(
+                'You\'ll just see lactose_free meals',
+                style: TextStyle(
+                    color: Color.fromARGB(221, 206, 172, 144), fontSize: 12),
+              ),
+            ),
+            SwitchListTile(
+              value: _vegetarian,
+              onChanged: (isChecked) {
+                setState(() {
+                  _vegetarian = isChecked;
+                });
+              },
+              title: const Text(
+                'Vegetarian',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 206, 161, 116),
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               subtitle: const Text(
-                'You\'ll just see meals which are glutin_free',
-                style: TextStyle(color: Color.fromARGB(255, 206, 173, 144)),
+                'You\'ll just see vegetarian meals',
+                style: TextStyle(
+                    color: Color.fromARGB(221, 206, 172, 144), fontSize: 12),
               ),
-            )*/
-            FilterItem(title: 'Glutin_free', subTitle: 'You\'ll just see meals which are glutin_free'),
-            FilterItem(title: 'Glutin_free', subTitle: 'You\'ll just see meals which are glutin_free'),
-
+            ),
+            SwitchListTile(
+              value: _vegan,
+              onChanged: (isChecked) {
+                setState(() {
+                  _vegan = isChecked;
+                });
+              },
+              title: const Text(
+                'Vegan',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 206, 161, 116),
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold),
+              ),
+              subtitle: const Text(
+                'You\'ll just see vegan meals',
+                style: TextStyle(
+                    color: Color.fromARGB(221, 206, 172, 144), fontSize: 12),
+              ),
+            )
           ],
         ),
       ),
