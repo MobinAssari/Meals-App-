@@ -9,7 +9,7 @@ import 'package:meals_app/widgets/main_drawer.dart';
 import '../model/meal.dart';
 const kselectedFilters = {
   Filter.GlutenFree : false,
-  Filter.LactoseState : false,
+  Filter.LactoseFree : false,
   Filter.Vegan : false,
   Filter.Vegetarian : false,
 
@@ -58,7 +58,7 @@ class _TabScrxeenState extends State<TabsScreen> {
   @override
   Widget build(context) {
     final availabelMeals = dummyMeals.where((meal) {
-      if(_selectedFilters[Filter.LactoseState]! && !meal.isLactoseFree) return false;
+      if(_selectedFilters[Filter.LactoseFree]! && !meal.isLactoseFree) return false;
       if(_selectedFilters[Filter.GlutenFree]! && !meal.isGlutenFree) return false;
       if(_selectedFilters[Filter.Vegan]! && !meal.isVegan) return false;
       if(_selectedFilters[Filter.Vegetarian]! && !meal.isVegetarian) return false;
@@ -70,7 +70,7 @@ class _TabScrxeenState extends State<TabsScreen> {
     void selectedScreen(String identifier) async {
       Navigator.of(context).pop<Map<Filter,bool>>();
       if(identifier == 'filters'){
-        final result = await Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> FiltersScreen(),),);
+        final result = await Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> FiltersScreen(currentFilters: _selectedFilters,),),);
         setState(() {
           _selectedFilters = result ?? kselectedFilters;
         });
