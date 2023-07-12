@@ -18,7 +18,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
     Navigator.of(context).pop();
 
     if(identifier == 'meals'){
-      Navigator.of(context).pop();
+      
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> TabsScreen(),),);
     }
   }
