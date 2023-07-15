@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart%20';
 import 'package:provider/providers/favorites_provider.dart';
+import 'package:provider/providers/filter.dart';
 import 'package:provider/providers/meals_provider.dart';
 import '../data/dummy_data.dart';
 import '../screens/categories.dart';
@@ -29,18 +30,6 @@ class TabsScreen extends ConsumerStatefulWidget {
 class _TabScrxeenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
 
-  void _favoriteSelectMessege(String messege) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.white,
-        content: Text(
-          messege,
-          style: const TextStyle(color: Colors.black87),
-        ),
-      ),
-    );
-  }
 
   void _selectPage(int index) {
     setState(() {
@@ -48,20 +37,19 @@ class _TabScrxeenState extends ConsumerState<TabsScreen> {
     });
   }
 
-  Map<Filter, bool> _selectedFilters = kselectedFilters;
-
   @override
   Widget build(context) {
+    var selectedFilters = ref.watch(filterProvider);
     final meals = ref.watch(mealsProvider);
     final availabelMeals = meals.where((meal) {
-      if (_selectedFilters[Filter.LactoseFree]! && !meal.isLactoseFree) {
+      if (selectedFilters[Filter.LactoseFree]! && !meal.isLactoseFree) {
         return false;
       }
-      if (_selectedFilters[Filter.GlutenFree]! && !meal.isGlutenFree) {
+      if (selectedFilters[Filter.GlutenFree]! && !meal.isGlutenFree) {
         return false;
       }
-      if (_selectedFilters[Filter.Vegan]! && !meal.isVegan) return false;
-      if (_selectedFilters[Filter.Vegetarian]! && !meal.isVegetarian) {
+      if (selectedFilters[Filter.Vegan]! && !meal.isVegan) return false;
+      if (selectedFilters[Filter.Vegetarian]! && !meal.isVegetarian) {
         return false;
       }
       return true;
@@ -73,16 +61,13 @@ class _TabScrxeenState extends ConsumerState<TabsScreen> {
     void selectedScreen(String identifier) async {
       Navigator.of(context).pop<Map<Filter, bool>>();
       if (identifier == 'filters') {
-        final result = await Navigator.of(context).push(
+       await Navigator.of(context).push(
           MaterialPageRoute(
             builder: (ctx) => FiltersScreen(
-              currentFilters: _selectedFilters,
             ),
           ),
         );
-        setState(() {
-          _selectedFilters = result ?? kselectedFilters;
-        });
+
       }
     }
 
