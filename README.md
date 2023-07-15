@@ -1,4 +1,4 @@
-# meals_app
+# provider
 
 A new Flutter project.
 

@@ -1,19 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart%20';
+import 'package:provider/providers/favorites_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../model/meal.dart';
 
-class MealDetailsScreen extends StatelessWidget {
-  const MealDetailsScreen({super.key, required this.meal, required this.onFavoriteListEdit});
+class MealDetailsScreen extends ConsumerWidget {
+  const MealDetailsScreen({super.key, required this.meal});
 
   final Meal meal;
-  final void Function(Meal meal) onFavoriteListEdit;
 
   @override
-  Widget build(context) {
+  Widget build(context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(actions: [IconButton(onPressed: (){onFavoriteListEdit(meal,);}, icon: Icon(Icons.star))],
+      appBar: AppBar(actions: [IconButton(onPressed: (){
+        final isAdded = ref.read(favoriteProvider.notifier).editFavoriteMealsNotifier(meal);
+
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text((isAdded)?'Item Added':'Item removed'),),);
+      }, icon: const Icon(Icons.star))],
         title: Text(
           meal.title,
           style: const TextStyle(
