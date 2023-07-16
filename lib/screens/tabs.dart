@@ -2,32 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart%20';
 import 'package:provider/providers/favorites_provider.dart';
 import 'package:provider/providers/filter.dart';
-import 'package:provider/providers/meals_provider.dart';
-import '../data/dummy_data.dart';
 import '../screens/categories.dart';
 import '../screens/filters.dart';
 import '../screens/meals.dart';
 import '../widgets/main_drawer.dart';
-
-import '../model/meal.dart';
-
-const kselectedFilters = {
-  Filter.GlutenFree: false,
-  Filter.LactoseFree: false,
-  Filter.Vegan: false,
-  Filter.Vegetarian: false,
-};
 
 class TabsScreen extends ConsumerStatefulWidget {
   const TabsScreen({super.key});
 
   @override
   ConsumerState<TabsScreen> createState() {
-    return _TabScrxeenState();
+    return _TabScreenState();
   }
 }
 
-class _TabScrxeenState extends ConsumerState<TabsScreen> {
+class _TabScreenState extends ConsumerState<TabsScreen> {
   int _selectedPageIndex = 0;
 
 
@@ -39,23 +28,10 @@ class _TabScrxeenState extends ConsumerState<TabsScreen> {
 
   @override
   Widget build(context) {
-    var selectedFilters = ref.watch(filterProvider);
-    final meals = ref.watch(mealsProvider);
-    final availabelMeals = meals.where((meal) {
-      if (selectedFilters[Filter.LactoseFree]! && !meal.isLactoseFree) {
-        return false;
-      }
-      if (selectedFilters[Filter.GlutenFree]! && !meal.isGlutenFree) {
-        return false;
-      }
-      if (selectedFilters[Filter.Vegan]! && !meal.isVegan) return false;
-      if (selectedFilters[Filter.Vegetarian]! && !meal.isVegetarian) {
-        return false;
-      }
-      return true;
-    }).toList();
+
+    final availableMeals = ref.watch(filteredMealsProvider);
     Widget activeScreen = CategoriesScreen(
-      filteredMeals: availabelMeals,
+      filteredMeals: availableMeals,
     );
     var activePageTitle = "Categories";
     void selectedScreen(String identifier) async {
@@ -67,7 +43,6 @@ class _TabScrxeenState extends ConsumerState<TabsScreen> {
             ),
           ),
         );
-
       }
     }
 

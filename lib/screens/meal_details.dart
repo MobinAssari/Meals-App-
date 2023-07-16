@@ -12,13 +12,27 @@ class MealDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(context, WidgetRef ref) {
+    final favoriteMeals = ref.watch(favoriteProvider);
+    final isFavorite = favoriteMeals.contains(meal);
     return Scaffold(
-      appBar: AppBar(actions: [IconButton(onPressed: (){
-        final isAdded = ref.read(favoriteProvider.notifier).editFavoriteMealsNotifier(meal);
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              final isAdded = ref
+                  .read(favoriteProvider.notifier)
+                  .editFavoriteMealsNotifier(meal);
 
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text((isAdded)?'Item Added':'Item removed'),),);
-      }, icon: const Icon(Icons.star))],
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text((isAdded) ? 'Item Added' : 'Item removed'),
+                ),
+              );
+            },
+            icon: Icon(isFavorite?Icons.star:Icons.star_border),
+          ),
+        ],
         title: Text(
           meal.title,
           style: const TextStyle(
@@ -43,7 +57,8 @@ class MealDetailsScreen extends ConsumerWidget {
               height: 20,
             ),
             const Text(
-              'Ingredients:',textAlign: TextAlign.center,
+              'Ingredients:',
+              textAlign: TextAlign.center,
               style: TextStyle(
                   color: Color.fromARGB(255, 230, 182, 157),
                   fontSize: 22,
@@ -59,7 +74,8 @@ class MealDetailsScreen extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(vertical: 1.0),
                     child: Text(
                       item,
-                      style: const TextStyle(color: Colors.white70, fontSize: 14),
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                   )
               ],
@@ -68,7 +84,8 @@ class MealDetailsScreen extends ConsumerWidget {
               height: 20,
             ),
             const Text(
-              'Steps:',textAlign: TextAlign.center,
+              'Steps:',
+              textAlign: TextAlign.center,
               style: TextStyle(
                   color: Color.fromARGB(255, 230, 182, 157),
                   fontSize: 22,
@@ -80,10 +97,15 @@ class MealDetailsScreen extends ConsumerWidget {
             Column(
               children: [
                 for (var item in meal.steps)
-                  Padding(padding: const EdgeInsets.symmetric(vertical: 4),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Text(
                       item,
-                      style: const TextStyle(color: Colors.white70, fontSize: 13,),textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   )
               ],
