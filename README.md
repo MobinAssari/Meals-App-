@@ -1,4 +1,7 @@
 ![image](https://github.com/MobinAssari/Meals-App-/assets/127838008/4d7c7aad-368d-4e90-a062-d924a9248aaa)
+![Screenshot 2024-04-30 094816](https://github.com/MobinAssari/Meals-App-/assets/127838008/784bc4f7-ae15-4f8b-b821-7268129ccb3e)
+![Screenshot 2024-04-30 094903](https://github.com/MobinAssari/Meals-App-/assets/127838008/9857f903-834f-49e7-87ad-e6405d64fd9c)
+
 Flutter Meal App
 Welcome to the Flutter Meal App! This project is a Flutter application designed to help users explore and manage their favorite meals. Users can browse meals by categories, view meal details, mark meals as favorites, and filter meals based on dietary preferences.
 
